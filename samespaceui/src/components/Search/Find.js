@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import '../../App.css';
 
 function Find( { searchData,setFilteredData } ) {
 
@@ -8,8 +9,9 @@ function Find( { searchData,setFilteredData } ) {
     }
 
     return (
-        <div>
-            <input type='text' id='search' onChange={handleSearch}/>
+        <div class="search-container">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="search" class="search-input" placeholder="Search" onChange={handleSearch} />
         </div>
     )
 }

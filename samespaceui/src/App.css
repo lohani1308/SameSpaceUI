@@ -1,16 +1,100 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
 .App{
   width: 100%;
   display: flex;
 }
 
-.music--player{
-  flex:1
-}
-img{
-  width: 100%;
-  height: 100%;
+.music--player {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
+  height: 100vh; /* Make the player occupy full viewport height */
 }
 
-.music--controls{
+.music--card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.music--info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.music--details {
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.music--title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.music--artist {
+  font-size: 14px;
+  color: #777;
+}
+
+.image img {
+  width: 214px; /* Adjust the width and height to make it rectangular */
+  height: 276px;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: transform 0.2s;
+}
+
+.audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.audio audio {
+  width: 100%;
+}
+
+.music--player audio::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-icon {
+  margin-right: 10px;
+  color: #666;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 16px;
   width: 100%;
 }

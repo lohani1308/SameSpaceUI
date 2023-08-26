@@ -1,0 +1,44 @@
+/* Navbar container */
+.navbar {
+    background-color: #333;
+    color: white;
+    width: 250px; /* Set the width of the sidebar */
+    height: 100vh; /* Make the sidebar full viewport height */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar items */
+  .navbar-item {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-item:hover {
+    background-color: #444;
+  }
+  
+  /* Mobile screen media query */
+  @media (max-width: 768px) {
+    .navbar {
+      width: 100%; /* Make the sidebar full width */
+      height: auto;
+      position: fixed;
+      top: 0;
+      left: 0;
+      flex-direction: row;
+      justify-content: space-around;
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+    }
+  
+    .navbar-item {
+      padding: 10px;
+      background-color: transparent;
+    }
+  
+    .navbar-item:hover {
+      background-color: transparent;
+    }
+  }
+  

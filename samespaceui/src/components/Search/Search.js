@@ -3,10 +3,10 @@ import Loading from '../Loading/Loading';
 import './Search.css';
 import Find from './Find';
 
-function Search( { searchData,setId } ) {
+function Search( { searchData,setId,filteredData,setFilteredData } ) {
 
     //console.log(searchData);
-    const [filteredData,setFilteredData]=useState([]);
+    
 
     const handleClick=(e)=>{
         e.stopPropagation();
@@ -20,31 +20,38 @@ function Search( { searchData,setId } ) {
     return (
         <div className='search--section'>
             <div>
-                <Find searchData={searchData} setFilteredData={setFilteredData}/>
+                <Find searchData={searchData} setFilteredData={setFilteredData} />
             </div>
 
-            <div className='songs'>
-                {
-                    filteredData ? ( filteredData?.map((d)=>(
-                            <div key={d.id}  className='main' onClick={handleClick}>
-                                <div className='music--single'>
-                                    <div className='image'>
-                                        <img id={d.id}  src={ ` https://cms.samespace.com/assets/${d.cover}` } />
-                                    </div>
-
-                                    <div className='about--section' id={d.id}>
-                                        <p id={d.id}>{d.name}</p>
-                                        <span id={d.id} style={ { marginTop:'0', fontSize:'10px'} }>{d.artist}</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p id={d.id}> {d.date_updated} </p>
-                                </div>
+            <table className='songs'>
+                <tbody>
+                    { filteredData ? (
+                    filteredData?.map((d) => (
+                        <tr key={d.id} className='main' onClick={handleClick}>
+                        <td className='music--single'>
+                            <div className='image'>
+                            <img id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
                             </div>
-                        ))
-                    ) : (<div>No Songs</div>)
-                }
-            </div>
+                            <div className='about--section' id={d.id}>
+                            <p id={d.id}>{d.name}</p>
+                            <span id={d.id} style={{ marginTop: '0', fontSize: '10px' }}>
+                                {d.artist}
+                            </span>
+                            </div>
+                        </td>
+                        <td>
+                            <p id={d.id}>{d.date_updated}</p>
+                        </td>
+                        </tr>
+                    ))
+                    ) : (
+                    <tr>
+                        <td colSpan="2">No Songs</td>
+                    </tr>
+                    )}
+                </tbody>
+            </table>
+
         </div>
     )
     }
