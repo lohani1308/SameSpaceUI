@@ -1,18 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../../App.css';
 
 function Music({ id, searchData }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [currentTrack, setCurrentTrack] = useState(null);
 
     const audioRef = useRef(null);
 
-    const t = searchData.filter((d) => Number(d.id) === Number(id));
+    useEffect(() => {
+        const filteredTrack = searchData.find((d) => Number(d.id) === Number(id));
+        setCurrentTrack(filteredTrack);
+    }, [id, searchData]);
 
     const handleBackPress = () => {
-        if (audioRef.current) {
-            audioRef.current.currentTime -= 10; // Go back 10 seconds
-        } 
+        const previousId = (currentTrack.id - 1 + searchData.length) % searchData.length;
+        setCurrentTrack(searchData.find((d) => Number(d.id) === previousId));
     };
 
     const handlePlayPause = () => {
@@ -27,9 +30,8 @@ function Music({ id, searchData }) {
     };
 
     const handleForwardPress = () => {
-        if (audioRef.current) {
-            audioRef.current.currentTime += 10; // Go forward 10 seconds
-        }
+        const nextId = (currentTrack.id + 1) % searchData.length;
+        setCurrentTrack(searchData.find((d) => Number(d.id) === nextId));
     };
 
     const handleTimeUpdate = () => {
@@ -40,20 +42,20 @@ function Music({ id, searchData }) {
 
     return (
         <div className='music--player'>
-            {t.map((d) => (
-                <div className='music--card' key={d.id}>
+            {currentTrack && (
+                <div className='music--card' key={currentTrack.id}>
                     <div className='music--info'>
                         <div className='music--details'>
-                            <div className='music--title'>{d.name}</div>
-                            <div className='music--artist'>{d.artist}</div>
+                            <div className='music--title'>{currentTrack.name}</div>
+                            <div className='music--artist'>{currentTrack.artist}</div>
                         </div>
                         <div className='image'>
-                            <img id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
+                            <img id={currentTrack.id} src={`https://cms.samespace.com/assets/${currentTrack.cover}`} alt={currentTrack.name} />
                         </div>
                     </div>
                     <div className='music--control'>
                         <audio ref={audioRef} onTimeUpdate={handleTimeUpdate}>
-                            <source src={d.url} type='audio/mp3' />
+                            <source src={currentTrack.url} type='audio/mp3' />
                         </audio>
 
                         <div class="range-container">
@@ -61,22 +63,21 @@ function Music({ id, searchData }) {
                         </div>
 
                         <div class="music-controls">
-                            <button type="button" id="button_bw" class="btn" onClick={handleBackPress}>
+                            <button type="button" id={currentTrack.id} class="btn" onClick={handleBackPress}>
                                 <i class="fas fa-backward"></i>
                             </button>
 
-                            <button type="button" id="button_play" class="btn play-btn" onClick={handlePlayPause}>
+                            <button type="button" id={currentTrack.id} class="btn play-btn" onClick={handlePlayPause}>
                                 <i class={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`}></i>
                             </button>
 
-                            <button type="button" id="button_fw" class="btn" onClick={handleForwardPress}>
+                            <button type="button" id={currentTrack.id} class="btn" onClick={handleForwardPress}>
                                 <i class="fas fa-forward"></i>
                             </button>
                         </div>
-
                     </div>
                 </div>
-            ))}
+            )}
         </div>
     );
 }
