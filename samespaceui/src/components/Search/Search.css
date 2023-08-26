@@ -69,3 +69,10 @@ body{
     align-items:center;
     cursor: pointer;
   }  
+
+  .main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

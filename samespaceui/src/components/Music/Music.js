@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../App.css';
 
-function Music({ id, searchData }) {
+function Music({ id, searchData ,currentTrack, setCurrentTrack}) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    const [currentTrack, setCurrentTrack] = useState(null);
+    
 
     const audioRef = useRef(null);
 
     useEffect(() => {
         const filteredTrack = searchData.find((d) => Number(d.id) === Number(id));
         setCurrentTrack(filteredTrack);
-    }, [id, searchData]);
+    }, [id, searchData, setCurrentTrack]);
 
     const handleBackPress = () => {
         const previousId = (currentTrack.id - 1 + searchData.length) % searchData.length;

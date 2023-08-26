@@ -3,14 +3,21 @@ import Loading from '../Loading/Loading';
 import './Search.css';
 import Find from './Find';
 
-function Search( { searchData,setId,filteredData,setFilteredData } ) {
+function Search( { searchData,setId,filteredData,setFilteredData,setAddFav } ) {
 
     //console.log(searchData);
-    
 
     const handleClick=(e)=>{
         e.stopPropagation();
         setId(e.target.id);
+    }
+
+    const handleFav=(e)=>{
+        console.log(e.currentTarget.id);
+
+        const fil=searchData.filter((d)=> Number(d.id) === Number(e.currentTarget.id));
+        console.log(fil);
+        setAddFav((prevFavs) => [...prevFavs, fil[0]]);
     }
 
     useState(()=>{
@@ -26,7 +33,7 @@ function Search( { searchData,setId,filteredData,setFilteredData } ) {
             <table className='songs'>
                 <tbody>
                     { filteredData ? (
-                    filteredData?.map((d) => (
+                        filteredData?.map((d) => (
                         <tr key={d.id} className='main' onClick={handleClick}>
                         <td className='music--single'>
                             <div className='image'>
@@ -40,7 +47,9 @@ function Search( { searchData,setId,filteredData,setFilteredData } ) {
                             </div>
                         </td>
                         <td>
-                            <p id={d.id}>{d.date_updated}</p>
+                            <button id={d.id} onClick={ handleFav }>
+                                <i class="icon fas fa-plus-circle" title="Add to Fav"></i>
+                            </button>
                         </td>
                         </tr>
                     ))
