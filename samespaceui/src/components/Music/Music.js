@@ -15,12 +15,16 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
     }, [id, searchData, setCurrentTrack]);
 
     useEffect(() => {
-        if (isPlaying) {
-          audioRef.current.play(); // Start playing when isPlaying becomes true
-        } else {
-          audioRef.current.pause(); // Pause when isPlaying becomes false
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = currentTime;
+          if (isPlaying) {
+            audioRef.current.play().catch((error) => {
+              console.error('Play error:', error);
+            });
+          }
         }
-      }, [isPlaying]);
+    }, [isPlaying, currentTime]);
 
 
     const handleBackPress = () => {
