@@ -12,6 +12,7 @@ function App() {
   const [filteredData,setFilteredData]=useState([]);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [addToFav,setAddFav]=useState([]);
+  const [recentlyPlayed,setRecentlyPlayed]=useState([]);
 
   useEffect(()=>{
     fetch('https://cms.samespace.com/items/songs').then((data)=>(data.json()))
@@ -29,22 +30,29 @@ function App() {
           searchData={searchdata} 
           setFilteredData={setFilteredData} 
           addToFav={addToFav}
+          recentlyPlayed={recentlyPlayed}
+          setRecentlyPlayed={setRecentlyPlayed}
         />
 
-        <Search 
-          searchData={searchdata} 
-          setId={setId} 
-          filteredData={filteredData} 
-          setFilteredData={setFilteredData} 
-          setAddFav={setAddFav}
-        />
 
-        <Music 
-          id={id} 
-          searchData={searchdata} 
-          currentTrack={currentTrack} 
-          setCurrentTrack={setCurrentTrack}
-        />
+       <div className="content-wrapper">
+          <Search
+            searchData={searchdata}
+            setId={setId}
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+            setAddFav={setAddFav}
+          />
+
+          <Music
+            id={id}
+            searchData={searchdata}
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
+            setRecentlyPlayed={setRecentlyPlayed}
+          />
+
+      </div>
     </div>
   );
 }

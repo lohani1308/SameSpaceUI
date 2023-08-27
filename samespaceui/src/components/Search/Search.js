@@ -35,22 +35,22 @@ function Search( { searchData,setId,filteredData,setFilteredData,setAddFav } ) {
                     { filteredData ? (
                         filteredData?.map((d) => (
                         <tr key={d.id} className='main' onClick={handleClick}>
-                        <td className='music--single'>
-                            <div className='image'>
-                            <img id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
-                            </div>
-                            <div className='about--section' id={d.id}>
-                            <p id={d.id}>{d.name}</p>
-                            <span id={d.id} style={{ marginTop: '0', fontSize: '10px' }}>
-                                {d.artist}
-                            </span>
-                            </div>
-                        </td>
-                        <td>
-                            <button id={d.id} onClick={ handleFav }>
-                                <i class="icon fas fa-plus-circle" title="Add to Fav"></i>
-                            </button>
-                        </td>
+                            <td className='music--single'>
+                                <div className='image'>
+                                <img id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
+                                </div>
+                                <div className='about--section' id={d.id}>
+                                <p id={d.id}>{d.name}</p>
+                                <span id={d.id} style={{ marginTop: '0', fontSize: '10px' }}>
+                                    {d.artist}
+                                </span>
+                                </div>
+                            </td>
+                            <td>
+                                <button id={d.id} onClick={ handleFav }>
+                                    <i class="fal fa-plus-circle fa-pulse" style={{color: '#1c1e22'}} title="Add to Fav"></i>
+                                </button>
+                            </td>
                         </tr>
                     ))
                     ) : (

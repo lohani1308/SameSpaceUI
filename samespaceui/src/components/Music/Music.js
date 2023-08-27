@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../App.css';
 
-function Music({ id, searchData ,currentTrack, setCurrentTrack}) {
+function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlayed}) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    
 
     const audioRef = useRef(null);
 
@@ -14,6 +13,7 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack}) {
     }, [id, searchData, setCurrentTrack]);
 
     const handleBackPress = () => {
+        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
         const previousId = (currentTrack.id - 1 + searchData.length) % searchData.length;
         setCurrentTrack(searchData.find((d) => Number(d.id) === previousId));
     };
@@ -30,6 +30,7 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack}) {
     };
 
     const handleForwardPress = () => {
+        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
         const nextId = (currentTrack.id + 1) % searchData.length;
         setCurrentTrack(searchData.find((d) => Number(d.id) === nextId));
     };
@@ -46,7 +47,10 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack}) {
                 <div className='music--card' key={currentTrack.id}>
                     <div className='music--info'>
                         <div className='music--details'>
-                            <div className='music--title'>{currentTrack.name}</div>
+                            
+                            <div className='music--title'>
+                                <marquee direction="right" scrolldelay="200">{currentTrack.name}</marquee>
+                            </div>
                             <div className='music--artist'>{currentTrack.artist}</div>
                         </div>
                         <div className='image'>
