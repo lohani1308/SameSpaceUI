@@ -42,6 +42,8 @@ function App() {
             filteredData={filteredData}
             setFilteredData={setFilteredData}
             setAddFav={setAddFav}
+            currentTrack={currentTrack}
+            setRecentlyPlayed={setRecentlyPlayed}
           />
 
           <Music

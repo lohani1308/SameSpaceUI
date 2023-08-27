@@ -10,10 +10,21 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
     useEffect(() => {
         const filteredTrack = searchData.find((d) => Number(d.id) === Number(id));
         setCurrentTrack(filteredTrack);
+        setCurrentTime(0);
+        setIsPlaying(false);
     }, [id, searchData, setCurrentTrack]);
 
+    useEffect(() => {
+        if (isPlaying) {
+          audioRef.current.play(); // Start playing when isPlaying becomes true
+        } else {
+          audioRef.current.pause(); // Pause when isPlaying becomes false
+        }
+      }, [isPlaying]);
+
+
     const handleBackPress = () => {
-        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
+        //setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
         const previousId = (currentTrack.id - 1 + searchData.length) % searchData.length;
         setCurrentTrack(searchData.find((d) => Number(d.id) === previousId));
     };
@@ -30,7 +41,7 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
     };
 
     const handleForwardPress = () => {
-        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
+        //setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack]);
         const nextId = (currentTrack.id + 1) % searchData.length;
         setCurrentTrack(searchData.find((d) => Number(d.id) === nextId));
     };
@@ -38,6 +49,14 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
     const handleTimeUpdate = () => {
         if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
+        }
+    };
+
+
+    const handleRangeChange = (event) => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = event.target.value;
+          setCurrentTime(event.target.value);
         }
     };
 
@@ -63,7 +82,15 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
                         </audio>
 
                         <div class="range-container">
-                            <input type="range" class="range-input" min="0" max={audioRef.current ? audioRef.current.duration : 0} step="0.1" value={currentTime} />
+                            <input
+                                type='range'
+                                className='range-input'
+                                min='0'
+                                max={audioRef.current ? audioRef.current.duration : 0}
+                                step='0.1'
+                                value={currentTime}
+                                onChange={handleRangeChange}
+                            />
                         </div>
 
                         <div class="music-controls">

@@ -3,13 +3,13 @@ import Loading from '../Loading/Loading';
 import './Search.css';
 import Find from './Find';
 
-function Search( { searchData,setId,filteredData,setFilteredData,setAddFav } ) {
+function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRecentlyPlayed,currentTrack } ) {
 
     //console.log(searchData);
 
     const handleClick=(e)=>{
-        e.stopPropagation();
-        setId(e.target.id);
+        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack])
+        setId(Number(e.target.id));
     }
 
     const handleFav=(e)=>{
