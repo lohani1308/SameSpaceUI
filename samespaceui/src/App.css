@@ -128,6 +128,8 @@
   background-color: inherit; /* Inherit the background color from the container */
   border: none;
   outline: none;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .music-controls {

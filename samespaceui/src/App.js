@@ -20,7 +20,7 @@ function App() {
       .then((d) => setData(d.data));
   }, []);
 
-  const [gradientColors, setGradientColors] = useState('');
+  const [gradientColors, setGradientColors] = useState('#333');
 
   useEffect(() => {
     // Create linear gradient using the extracted colors
@@ -31,9 +31,7 @@ function App() {
   }, [imageColors]);
 
   // Function to handle image color extraction
-  console.log(imageColors);
-  console.log(gradientColors);
-
+ 
   return (
     <div style={{ background: gradientColors }} className="App">
       <Navbar
@@ -53,6 +51,7 @@ function App() {
           setAddFav={setAddFav}
           currentTrack={currentTrack}
           setRecentlyPlayed={setRecentlyPlayed}
+          gradientColors={gradientColors}
         />
 
         <Music

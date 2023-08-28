@@ -3,7 +3,7 @@ import Loading from '../Loading/Loading';
 import './Search.css';
 import Find from './Find';
 
-function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRecentlyPlayed,currentTrack } ) {
+function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRecentlyPlayed,currentTrack,gradientColors } ) {
 
     //console.log(searchData);
 
@@ -27,7 +27,7 @@ function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRe
     return (
         <div className='search--section'>
             <div>
-                <Find searchData={searchData} setFilteredData={setFilteredData} />
+                <Find searchData={searchData} setFilteredData={setFilteredData} bgcolor={ gradientColors }/>
             </div>
 
             <table className='songs'>
