@@ -16,15 +16,29 @@ function Music({ id, searchData ,currentTrack, setCurrentTrack, setRecentlyPlaye
 
     useEffect(() => {
         if (audioRef.current) {
-          audioRef.current.pause();
+            if (isPlaying) {
+              // If audio is playing, only update the current time
+              audioRef.current.currentTime = currentTime;
+            } else {
+              // If audio is not playing, pause it and set the current time
+              audioRef.current.pause();
+              audioRef.current.currentTime = currentTime;
+            }
+          }
+    }, [isPlaying, currentTime]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+          // Always update the current time based on the state
           audioRef.current.currentTime = currentTime;
+    
           if (isPlaying) {
             audioRef.current.play().catch((error) => {
               console.error('Play error:', error);
             });
           }
         }
-    }, [isPlaying, currentTime]);
+    }, [isPlaying]);
 
 
     const handleBackPress = () => {

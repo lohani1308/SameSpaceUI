@@ -8,7 +8,7 @@ function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRe
     //console.log(searchData);
 
     const handleClick=(e)=>{
-        setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack])
+        //setRecentlyPlayed((prevRecentlyPlayed) => [...prevRecentlyPlayed, currentTrack])
         setId(Number(e.target.id));
     }
 
@@ -32,12 +32,12 @@ function Search( { searchData,setId,filteredData,setFilteredData,setAddFav,setRe
 
             <table className='songs'>
                 <tbody>
-                    { filteredData ? (
+                    { filteredData.length ? (
                         filteredData?.map((d) => (
                         <tr key={d.id} className='main' onClick={handleClick}>
                             <td className='music--single'>
                                 <div className='image'>
-                                <img id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
+                                <img  id={d.id} src={`https://cms.samespace.com/assets/${d.cover}`} alt={d.name} />
                                 </div>
                                 <div className='about--section' id={d.id}>
                                 <p id={d.id}>{d.name}</p>

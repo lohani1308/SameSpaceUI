@@ -13,8 +13,6 @@ function Navbar({ searchData, setFilteredData ,addToFav, recentlyPlayed}) {
   }
 
   const handleFav=()=>{
-    console.log(addToFav);
-
     setFilteredData(addToFav);
   }
 

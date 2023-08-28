@@ -113,21 +113,21 @@
 .search-container {
   display: flex;
   align-items: center;
-  padding: 10px;
-  border: 1px solid #ccc;
+  background-color: #333; /* Background color */
+  padding: 5px;
   border-radius: 5px;
 }
 
 .search-icon {
-  margin-right: 10px;
-  color: #666;
+  color: #333; /* Icon color (same as background) */
+  margin-right: 5px;
 }
 
 .search-input {
+  color: white; /* Text color (same as background) */
+  background-color: inherit; /* Inherit the background color from the container */
   border: none;
   outline: none;
-  font-size: 16px;
-  width: 100%;
 }
 
 .music-controls {
